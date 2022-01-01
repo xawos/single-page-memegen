@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./img/icons/logo-tab.png">
+    <link rel="stylesheet" href="jcss/editor.css">
+    <title>Meme Generator</title>
+    <script src="jcss/editorService.js"></script>
+    <script src="jcss/editorController.js"></script>
+</head>
+<body onload="onInitMeme(),renderCanvas()">    
+    <main class="editor">
+        <div class="canvas-container">
+            <canvas id="canvas"></canvas>
+        </div>
+        <div class="buttoms-canvas">
+            <input type="text" name="text" id="text" oninput="onType(this.value)" placeholder="type in a text">
+            <div class="switch-item" onclick="onSwitchItem()"><img src="img/icons/switch-item.png" alt="Switch Item"></div>
+            <div class="add-text" onclick="onAddText()"><img src="img/icons/add.png" alt="Add Text"></div>
+            <div class="delete-text" onclick="onDeleteText()"><img src="img/icons/trash.png" alt="Delete Item"></div>
+            <div class="bigger-text" onclick="onPlusFont(5)"><img src="img/icons/fontplus.png" alt="Decrease Font"></div>
+            <div class="smaller-text" onclick="onPlusFont(-5)"><img src="img/icons/fontminus.png" alt="Increase Font"></div>
+            <div class="align-left" onclick="onTextAlign('left')"><img src="img/icons/alignleft.png" alt="Align Left"></div>
+            <div class="align-center" onclick="onTextAlign('center')"><img src="img/icons/aligncenter.png" alt="Align Center"></div>
+            <div class="align-right" onclick="onTextAlign('right')"><img src="img/icons/alignright.png" alt="Align Right"></div>
+            <select onchange="onChangeFont(this.value)" name="fonts" id="fonts">
+                <option value="Impact">Impact</option>
+                <option value="Ariel">Ariel</option>
+                <option value="Lato">Lato</option>
+                <option value="Tahoma">Tahoma</option>
+                <option value="Helvetica">Helvetica</option>
+            </select>
+            <div class="outline-color">
+                <input value="#ffffff" onchange="onChangeColor()" type="color" name="text-outline-color">
+            </div>
+            <div class="img-color-outline"><img src="img/icons/textcoloroutline.png" alt=""></div>
+            <div class="fill-color">
+                <input value="#000000" onchange="onChangeColor()" type="color" name="text-fill-color">
+            </div>
+            <div class="img-color-fill"><img src="img/icons/textcolor.png" alt=""></div>
+            <div class="stickers-countainer">
+                <div class="sticker1"><img onclick="onAddSticker(0)" src="img/stickers/S1.png" alt=""></div>
+                <div class="sticker2"><img onclick="onAddSticker(1)" src="img/stickers/S2.png" alt=""></div>
+                <div class="sticker3"><img onclick="onAddSticker(2)" src="img/stickers/S3.png" alt=""></div>
+            </div>
+            <div class="btn btn-save " onclick="onSaveMeme()">Save</div>
+            <div class="download"><a href="#" onclick="onDownloadImg(this)" download="my-canvas.jpg"><img id="img-in-a"
+                        src="img/icons/download.png" alt="Download Image"></a></div>
+            <input type="file" class="upload-image" name="upload-image" onchange="onImgInput(event)" />
+            <div class="img-upload"><img src="img/icons/upload.png" alt="Upload Image"></div>
+        </div>
+        <div class="share-container"></div> <!-- for upload img -->
+    </main>
+</body>
+</html>
