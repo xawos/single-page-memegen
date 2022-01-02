@@ -8,9 +8,14 @@
     <link rel="stylesheet" href="jcss/editor.css">
     <title>Meme Generator</title>
     <script src="jcss/editorService.js"></script>
+    
+<!--Switch between the 2 below classes to upload or not the meme in the cloud-->
     <script src="jcss/editorController.js"></script>
+<!--    <script src="jcss/editorController_upload.js"></script>-->
+<!--Switch between the 2 above classes to upload or not the meme in the cloud-->
+
 </head>
-<body onload="onInitMeme(),renderCanvas()">    
+<body onload="onInitMeme(),renderCanvas();">
     <main class="editor">
         <div class="canvas-container">
             <canvas id="canvas"></canvas>
@@ -33,19 +38,18 @@
                 <option value="Helvetica">Helvetica</option>
             </select>
             <div class="outline-color">
-                <input value="#ffffff" onchange="onChangeColor()" type="color" name="text-outline-color">
+                <input value="#FFFFFF" onchange="onChangeColor()" type="color" name="text-outline-color">
             </div>
             <div class="img-color-outline"><img src="img/icons/textcoloroutline.png" alt=""></div>
             <div class="fill-color">
                 <input value="#000000" onchange="onChangeColor()" type="color" name="text-fill-color">
             </div>
             <div class="img-color-fill"><img src="img/icons/textcolor.png" alt=""></div>
-            <div class="stickers-countainer">
+            <div class="stickers-container">
                 <div class="sticker1"><img onclick="onAddSticker(0)" src="img/stickers/S1.png" alt=""></div>
                 <div class="sticker2"><img onclick="onAddSticker(1)" src="img/stickers/S2.png" alt=""></div>
                 <div class="sticker3"><img onclick="onAddSticker(2)" src="img/stickers/S3.png" alt=""></div>
             </div>
-<!--            <div class="btn btn-save " onclick="onSaveMeme()">Save</div>-->
             <div class="download"><a href="#" onclick="onDownloadImg(this)" download="my-canvas.jpg"><img id="img-in-a"
                         src="img/icons/download.png" alt="Download Image"></a></div>
             <input type="file" class="upload-image" name="upload-image" onchange="onImgInput(event)" />

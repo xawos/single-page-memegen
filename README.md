@@ -12,12 +12,22 @@ Thanks to various folks I've hacked together this single-page-memegen for the sa
 
 Upload your image, edit it and save it locally. There you go.
 
-The `Save` Button doesn't work yet, in the future this page will be just an endpoint for a cluster of Raspberry Pis where the memes will be stored.
+If you wish to upload memes to the cloud switch the JS file loaded in the `index.html` to the commented one, and comment the one used.
 
-A new repo will be created for it, so this one will always be safe-for-work as nothing is retrieved from internet and nothing will leave the browser where it runs
+So: uncomment `editorController_upload.js` and comment `editorController.js` for the sake of completeness.
+
+This will upload the memes to `rickroll.click` (this VPS) but will actually land in my Raspberry Pi cluster mounted via GlusterFS.
+
+Will eventually create a gallery with authentication, for the sake of you know.. memes.
+
+If you want to change the endpoint for the meme's storage there's the `upload.py` that takes care of ingesting the image.
+
+The image is saved with IP+timestamp, taking the IP from [icanhazip.com](https://icanhazip.com) and shipping it via base64-encoded JSON.
 
 ## How to contribute
 
-`git clone http://rickroll.click/xawos/single-page-memegen`, modify it and git push it like a normal [Pull Request](https://opensource.com/article/19/7/create-pull-request-github)
+`git clone http://rickroll.click/xawos/single-page-memegen`, modify it and `git push` it like a normal [Pull Request](https://opensource.com/article/19/7/create-pull-request-github)
 
 Ping the owner as well, he probably won't notice otherwise :)
+
+Feel free as always to steal everything from here and use it for your own purposes, the license is the [UNLICENSE](https://unlicense.org/) one.
